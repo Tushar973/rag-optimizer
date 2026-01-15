@@ -1,1 +1,1 @@
-# rag-optimizer
+# Streamlit-based RAG Configurator & Analyzer
