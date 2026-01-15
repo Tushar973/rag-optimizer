@@ -6,6 +6,7 @@ from core.generator import get_llm, build_rag_chain
 from core.evaluator import get_judge_llm, evaluate_response
 import os
 from dotenv import load_dotenv
+import plotly.express as px
 load_dotenv()
 
 st.set_page_config(page_title="RAG Optimizer", layout="wide")
@@ -87,7 +88,33 @@ if st.button("Run Experiments") and uploaded_file and groq_api_key and test_ques
     st.success("Experiments Completed!")
     df = pd.DataFrame(results)
     
-    # Metric Visualization
+    # --- NEW: Visual Dashboard ---
+    st.subheader("📊 Strategy Comparison")
+    
+    # Transform data for the chart
+    chart_df = df.melt(
+        id_vars=["Strategy"], 
+        value_vars=["Relevance (1-5)", "Accuracy (1-5)"], 
+        var_name="Metric", 
+        value_name="Score"
+    )
+    
+    # Create a grouped bar chart
+    fig = px.bar(
+        chart_df, 
+        x="Strategy", 
+        y="Score", 
+        color="Metric", 
+        barmode="group",
+        title="Relevance vs Accuracy by Strategy",
+        text_auto=True,
+        color_discrete_sequence=["#00CC96", "#EF553B"] # Green for Relevance, Red for Accuracy
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
+    # -----------------------------
+    
+    # Metric Table
     st.subheader("🏆 Performance Leaderboard")
     st.dataframe(df[["Strategy", "Relevance (1-5)", "Accuracy (1-5)", "Chunk Size"]])
     
