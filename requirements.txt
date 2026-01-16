@@ -1,13 +1,46 @@
+# -------------------------
+# UI & Visualization
+# -------------------------
 streamlit
-langchain
-langchain-groq
-langchain-community
-langchain-huggingface
-chromadb
-pypdf
-sentence-transformers
-pandas
 plotly
+
+# -------------------------
+# LangChain Ecosystem
+# -------------------------
+# Core components
+langchain-core
+langchain-community
+langchain-text-splitters
+
+# Integrations
+langchain-groq
+langchain-huggingface
+
+# -------------------------
+# Vector Store & Embeddings
+# -------------------------
 faiss-cpu
-python-dotenv
+sentence-transformers
+
+# -------------------------
+# PDF Processing
+# -------------------------
+pypdf
+
+# -------------------------
+# Evaluation & Parsing
+# -------------------------
+# Pydantic v1 is often safer for legacy chains, but v2 works with modern langchain. 
+# We let pip resolve the best version.
+pydantic
+
+# -------------------------
+# Reranking
+# -------------------------
 flashrank
+
+# -------------------------
+# Data & Utilities
+# -------------------------
+pandas
+python-dotenv
